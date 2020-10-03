@@ -28,10 +28,6 @@
   100% { transform: rotate(360deg); }
 }
 
-.hidden {
-	display: none;
-}
-
 /* bug in foundry's styling obscures ordered lists larger than 100. */
 .playlist-import-container > ol {
 	 margin-left: 1.75em;
