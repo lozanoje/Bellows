@@ -29,3 +29,8 @@ The current feature set includes:
 - Playlist tracks can be imported from a youtube url such as `https://www.youtube.com/watch?v=_2xHCZSqpi4`
 - Ambient Sound objects can be marked as streaming sounds with the same functionality as streamed playlist tracks (these are unable to fade however)
 - YouTube Playlist imports
+
+## Known Issues
+- In Firefox, audio may not play in certain scenarios due to autoplay restrictions. You can fix this by clicking the autoplay button in the url bar and allowing it for your Foundry VTT site. Each player using Firefox will need to do this for it to work. Chromium based browsers don't have this issue.
+
+![image](https://user-images.githubusercontent.com/1485053/97107921-03e8ff80-16c2-11eb-8695-59da5c368a19.png)
