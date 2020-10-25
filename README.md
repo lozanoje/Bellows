@@ -2,7 +2,7 @@
 ---
 
 * **Author**: casualchameleon (discord: casualchameleon#6618), temportalflux (discord: temportalflux#3142)
-* **Version**: 0.2.0
+* **Version**: 0.3.0
 * **Foundry VTT Compatibility**: Tested on 0.6.6 and 0.7.5
 * **System Compatibility (If applicable)**: n/a
 * **Module Requirement(s)**: n/a
