@@ -63,12 +63,12 @@ export class StreamingServiceApi
 		return this.extractSourceIdFromUrl(url) !== undefined;
 	}
 
-	findOrCreatePlayer(ownerId, audioId, sourceId)
+	findOrCreatePlayer(ownerId, sound)
 	{
 		return undefined;
 	}
 
-	cleanupPlayer(ownerId, audioId)
+	cleanupPlayer(ownerId, sound)
 	{
 		return undefined;
 	}

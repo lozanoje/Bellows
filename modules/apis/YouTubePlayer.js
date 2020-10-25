@@ -1,3 +1,5 @@
+import * as MusicStreaming from '../config.js'
+
 export class YouTubePlayer
 {
 
@@ -105,7 +107,12 @@ export class YouTubePlayer
 	 */
 	createPlayer(sourceId)
 	{
-		if (!this.api.isReady()) { return; }
+		if (!this.api.isReady()) { 
+			Hooks.on(`${MusicStreaming.name}:apiLoaded`, () => {
+				this.createPlayer(sourceId);
+			});
+			return;
+		}
 		console.log('Loading player with video id', sourceId);
 		this.player = new YT.Player(this.playerId, {
 			...this.size,

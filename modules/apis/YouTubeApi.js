@@ -59,20 +59,26 @@ export class YouTubeApi extends StreamingServiceApi
 		return regexMatch !== undefined && regexMatch !== null ? regexMatch[1] : undefined;
 	}
 
-	findOrCreatePlayer(ownerId, audioId, sourceId)
+	findOrCreatePlayer(ownerId, sound)
 	{
-		let player = this.getPlayerAt(`youtube-player-${ownerId}-${audioId}`);
+		let player = this.getPlayerAt(`youtube-player-${ownerId}-${sound._id}`);
 		if (player === null || player === undefined)
 		{
-			player = new YouTubePlayer(ownerId, audioId, sourceId);
+			player = new YouTubePlayer(ownerId, sound._id, sound.flags.streamingId);
+			
 			$('body').append(`<div class="yt-player"><div id="${player.playerId}"></div></div>`);
+
+			player.setSourceId(sound.flags.streamingId);
+			player.setLoop(sound.repeat);
+			player.setVolume(sound.volume * game.settings.get("core", "globalPlaylistVolume"));
+			player.ensurePlaying(sound.playing);
 		}
 		return player;
 	}
 
-	cleanupPlayer(ownerId, audioId) 
+	cleanupPlayer(ownerId, sound) 
 	{
-		let playerId = `youtube-player-${ownerId}-${audioId}`;
+		let playerId = `youtube-player-${ownerId}-${sound._id}`;
 		let player = this.getPlayerAt(playerId);
 		if (player) {
 			player.delete();
