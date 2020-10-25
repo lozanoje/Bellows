@@ -11,6 +11,15 @@ Playlist.prototype.findOrCreatePlayer = function(sound) {
 	return null;
 };
 
+Playlist.prototype.cleanupPlayer = function (sound) {
+	if (sound.flags.bIsStreamed && sound.flags.streamingApi !== undefined)
+	{
+		getApi(sound.flags.streamingApi).cleanupPlayer(
+			this.id, sound._id
+		);
+	}
+}
+
 /**
  * Set up the Howl object by calling the core AudioHelper utility
  * @param {Object} sound    The PlaylistSound for which to create an audio object
@@ -24,7 +33,6 @@ overrideFunc(Playlist.prototype, '_createAudio', function(super_createAudio, sou
 		super_createAudio.call(this, sound);
 		return;
 	}
-	this.findOrCreatePlayer(sound);
 });
 
 overrideFunc(Playlist.prototype, 'playSound', function(super_playSound, sound)
@@ -35,12 +43,17 @@ overrideFunc(Playlist.prototype, 'playSound', function(super_playSound, sound)
 		return;
 	}
 
-	const ytPlayer = this.findOrCreatePlayer(sound);
-	console.log('playSound', sound.flags.streamingId, sound.playing);
-	ytPlayer.setSourceId(sound.flags.streamingId);
-	ytPlayer.setLoop(sound.repeat);
-	ytPlayer.setVolume(sound.volume * game.settings.get("core", "globalPlaylistVolume"));
-	ytPlayer.ensurePlaying(sound.playing);
+	if (sound.playing) {
+
+		let ytPlayer = this.findOrCreatePlayer(sound);
+		console.log('playSound', sound.flags.streamingId, sound.playing);
+		ytPlayer.setSourceId(sound.flags.streamingId);
+		ytPlayer.setLoop(sound.repeat);
+		ytPlayer.setVolume(sound.volume * game.settings.get("core", "globalPlaylistVolume"));
+		ytPlayer.ensurePlaying(sound.playing);
+	} else {
+		let ytPlayer = this.cleanupPlayer(sound);
+	}
 });
 
 overrideFunc(Playlist.prototype, '_onDeleteEmbeddedEntity', function(

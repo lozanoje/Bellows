@@ -240,10 +240,14 @@ export class YouTubePlayer
 	{
 		if (this.hasPlayer())
 		{
+			if (this.isPlaying())
+			{
+				this.player.stopVideo();
+			}
 			this.player.destroy();
 			this.player = null;
 			this.bPlayerReady = false;
-			$(`#${this.playerId}`).parent().remove();
+			$(`div#${this.playerId}`).closest('div.yt-player').remove();
 		}
 	}
 

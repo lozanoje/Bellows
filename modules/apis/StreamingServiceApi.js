@@ -68,4 +68,9 @@ export class StreamingServiceApi
 		return undefined;
 	}
 
+	cleanupPlayer(ownerId, audioId)
+	{
+		return undefined;
+	}
+
 }

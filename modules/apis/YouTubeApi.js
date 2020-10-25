@@ -61,15 +61,23 @@ export class YouTubeApi extends StreamingServiceApi
 
 	findOrCreatePlayer(ownerId, audioId, sourceId)
 	{
-		var player = this.getPlayerAt(`youtube-player-${ownerId}-${audioId}`);
+		let player = this.getPlayerAt(`youtube-player-${ownerId}-${audioId}`);
 		if (player === null || player === undefined)
 		{
 			player = new YouTubePlayer(ownerId, audioId, sourceId);
-			// display: none;
 			$('body').append(`<div class="yt-player"><div id="${player.playerId}"></div></div>`);
-			//player.createPlayer();
 		}
 		return player;
+	}
+
+	cleanupPlayer(ownerId, audioId) 
+	{
+		let playerId = `youtube-player-${ownerId}-${audioId}`;
+		let player = this.getPlayerAt(playerId);
+		if (player) {
+			player.delete();
+			this.setPlayerAt(playerId, undefined);
+		}
 	}
 
 }
