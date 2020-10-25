@@ -129,9 +129,14 @@ export class YouTubePlayer
 	onYTPlayerStateChange(evt)
 	{
 		console.log('player-state', evt);
-		if (this.hasEnded() && this.shouldLoop)
+		if (this.hasEnded())
 		{
-			this.startPlaying();
+			if (this.shouldLoop) {
+				this.startPlaying();
+			} else {
+				let playlist = game.playlists.get(this.playlistId);
+				playlist._onEnd(this.soundId);
+			}
 		}
 	}
 
