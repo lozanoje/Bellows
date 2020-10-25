@@ -1,9 +1,9 @@
-export const name = 'music-streaming';
+export const name = 'bellows';
 //add templates here
 export const templates = {
-	importYoutubePlaylist: 'modules/music-assist/templates/import-youtube-playlist.html',
+	importYoutubePlaylist: 'modules/bellows/templates/import-youtube-playlist.html',
 };
 export function log(...args)
 {
-	console.log(`MusicStreaming |`, ...args);
+	console.log(`Bellows |`, ...args);
 };

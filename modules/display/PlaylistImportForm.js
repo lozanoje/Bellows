@@ -13,7 +13,7 @@ export class PlaylistImportForm extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.template = MusicStreaming.templates.importYoutubePlaylist;
-    options.title = game.i18n.localize('music-assist.import-yt-playlist-nav-text');
+    options.title = game.i18n.localize('bellows.import-yt-playlist-nav-text');
     
     return options;
   }
@@ -21,9 +21,9 @@ export class PlaylistImportForm extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
     
-    html.find('button[id="music-assist-yt-import-btn-import"]').click(async () => {
+    html.find('button[id="bellows-yt-import-btn-import"]').click(async () => {
       if (this.working) {
-        ui.notifications.error(game.i18n.localize('music-assist.import-yt-playlist-msg-already-working'));
+        ui.notifications.error(game.i18n.localize('bellows.import-yt-playlist-msg-already-working'));
         return;
       }
       
@@ -33,7 +33,7 @@ export class PlaylistImportForm extends FormApplication {
       
       await this.rerender();
       
-      await this._onImportPlaylist(html.find('input[id="music-assist-yt-import-url-text"]')[0].value);
+      await this._onImportPlaylist(html.find('input[id="bellows-yt-import-url-text"]')[0].value);
       this.working = false;
       
       await this.rerender();
@@ -50,16 +50,16 @@ export class PlaylistImportForm extends FormApplication {
   async _onImportPlaylist(playlistStr) {
     let key = this.importService.extractPlaylistKey(playlistStr);
     if (!key) {
-      ui.notifications.error(game.i18n.localize('music-assist.import-yt-playlist-msg-invalid-key'));
+      ui.notifications.error(game.i18n.localize('bellows.import-yt-playlist-msg-invalid-key'));
       return;
     }
     try {
       this.playlistItems = await this.importService.getPlaylistInfo(key);
     } catch(ex) {
       if (ex == 'Invalid Playlist') {
-        ui.notifications.error(game.i18n.format('music-assist.import-yt-playlist-msg-key-not-found', {playlistKey: key}));
+        ui.notifications.error(game.i18n.format('bellows.import-yt-playlist-msg-key-not-found', {playlistKey: key}));
       } else {
-        ui.notifications.error(game.i18n.localize('music-assist.import-yt-playlist-msg-error'));
+        ui.notifications.error(game.i18n.localize('bellows.import-yt-playlist-msg-error'));
         MusicStreaming.log(ex);
       }
     }
@@ -73,10 +73,10 @@ export class PlaylistImportForm extends FormApplication {
   async _updateObject(event, formData) {
     try {
       await this.importService.createFoundryVTTPlaylist(formData.playlistname, this.playlistItems, formData.playlistvolume);
-      ui.notifications.info(game.i18n.format('music-assist.import-yt-playlist-msg-imported', {playlistName: formData.playlistname}));
+      ui.notifications.info(game.i18n.format('bellows.import-yt-playlist-msg-imported', {playlistName: formData.playlistname}));
     } catch (ex) {
       MusicStreaming.log(ex);
-      ui.notifications.error(game.i18n.localize('music-assist.import-yt-playlist-msg-error'));
+      ui.notifications.error(game.i18n.localize('bellows.import-yt-playlist-msg-error'));
     }
   }
 }

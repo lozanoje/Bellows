@@ -10,7 +10,7 @@ from distutils.dir_util import copy_tree
 packageDir = 'builds'
 manifestFilepath = 'module.json'
 manifest = {}
-debugPackageUrl = 'https://github.com/temportalflux/MusicAssist/blob/master/{filePath}?raw=true'
+debugPackageUrl = 'https://github.com/casualchameleon/Bellows/blob/master/{filePath}?raw=true'
 
 def collectFiles(rootDir, ext):
 	return ['{}'.format(x.replace('\\', '/')) for x in glob.glob('{}/**/*.{}'.format(rootDir, ext), recursive=True)]

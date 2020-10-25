@@ -4,7 +4,7 @@ import { YouTubeApiScraperService } from '../YouTubeApiScraperService.js'
 
 
 //private consts & funcs
-const playerId = 'musicassist-playlist-player';
+const playerId = 'bellows-playlist-player';
 let player;
 
 function createPlayer(playlistId) {
