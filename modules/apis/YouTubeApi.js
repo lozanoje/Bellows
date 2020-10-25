@@ -66,7 +66,7 @@ export class YouTubeApi extends StreamingServiceApi
 		{
 			player = new YouTubePlayer(ownerId, audioId, sourceId);
 			// display: none;
-			$('body').append(`<div style=""><div id="${player.playerId}"></div></div>`);
+			$('body').append(`<div class="yt-player"><div id="${player.playerId}"></div></div>`);
 			//player.createPlayer();
 		}
 		return player;

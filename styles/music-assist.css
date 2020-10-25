@@ -32,3 +32,8 @@
 .playlist-import-container > ol {
 	 margin-left: 1.75em;
 }
+
+/* hide youtube player */
+div.yt-player {
+	display: none;
+}
