@@ -11,20 +11,21 @@ AmbientSound.prototype.findOrCreatePlayer = function() {
 	return undefined;
 };
 
-overrideFunc(AmbientSound.prototype, '_onCreate', function(
-	super_onCreate
-)
-{
-	super_onCreate.call(this);
+AmbientSound.prototype.cleanupPlayer = function () {
+	if (this.data.flags.bIsStreamed && this.data.flags.streamingApi !== undefined)
+	{
+		getApi(this.data.flags.streamingApi).cleanupPlayer(
+			this.scene.id, this.id
+		);
+	}
+}
 
-	// Create the youtube player as well
-	this.findOrCreatePlayer();
-});
 
 overrideFunc(AmbientSound.prototype, '_onUpdate', function(
 	super_onUpdate, data
 )
 {
+	console.log("_onUpdate called");
 	super_onUpdate.call(this, data);
 	const changed = new Set(Object.keys(data));
 	// NOTE: If more APIs are ever added, its possible that if the streamingApi changes,
@@ -42,21 +43,33 @@ overrideFunc(AmbientSound.prototype, 'play', function(
 	isAudible, volume
 )
 {
+	console.log("play called");
 	if (!this.data.flags.bIsStreamed)
 	{
 		super_play.call(this, isAudible, volume);
 		return;
 	}
 
-	const player = this.findOrCreatePlayer();
-	player.setLoop(true);
-	player.setVolume(
-		isAudible ?
+	let player = this.findOrCreatePlayer();
+	console.log(isAudible);
+	if (isAudible) {
+		if (!player.hasPlayer()) {
+			player.setSourceId(this.data.flags.streamingId);
+		}
+		player.setLoop(true);
+	  player.setVolume(
 			(volume || this.data.volume)
 			* game.settings.get("core", "globalAmbientVolume")
-			: 0
-	);
-	player.startPlaying();
+		);
+		
+		if (!player.isPlaying()) {
+			player.startPlaying();
+		}
+	} else {
+		if (player.isPlaying()) {
+			player.stopPlaying();
+		}
+	}
 });
 
 overrideFunc(AmbientSound.prototype, '_onDelete', function(
@@ -66,7 +79,7 @@ overrideFunc(AmbientSound.prototype, '_onDelete', function(
 	super_onDelete.call(this);
 	if (this.data.flags.bIsStreamed)
 	{
-		this.findOrCreatePlayer().delete();
+		this.cleanupPlayer();
 	}
 });
 

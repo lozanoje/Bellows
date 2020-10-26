@@ -8,9 +8,9 @@ export class YouTubePlayer
 		return game.getStreamingApi('youtube').getPlayerAt(playerId);
 	}
 
-	static findPlayerByIds(playlistId, soundId)
+	static findPlayerByIds(ownerId, soundId)
 	{
-		return YouTubePlayer.findPlayer(`youtube-player-${playlistId}-${soundId}`);
+		return YouTubePlayer.findPlayer(`youtube-player-${ownerId}-${soundId}`);
 	}
 
 	static _onYTPlayerStateChange(playerId, evt)
@@ -52,9 +52,9 @@ export class YouTubePlayer
 		YouTubePlayer.findPlayer(pid).reload();
 	}
 
-	constructor(playlistId, soundId, sourceId)
+	constructor(ownerId, soundId, sourceId)
 	{
-		this.playlistId = playlistId;
+		this.ownerId = ownerId;
 		this.soundId = soundId;
 		this.player = null;
 		// minimum size specified by https://developers.google.com/youtube/youtube_player_demo
@@ -82,7 +82,7 @@ export class YouTubePlayer
 
 	get playerId()
 	{
-		return `youtube-player-${this.playlistId}-${this.soundId}`;
+		return `youtube-player-${this.ownerId}-${this.soundId}`;
 	}
 
 	anApiLoaded({api})
@@ -134,8 +134,13 @@ export class YouTubePlayer
 			if (this.shouldLoop) {
 				this.startPlaying();
 			} else {
-				let playlist = game.playlists.get(this.playlistId);
-				playlist._onEnd(this.soundId);
+				if(this.ownerId) {
+					//Horrible hack to get playlists to work. Needs big refactor
+					let playlist = game.playlists.get(this.ownerId);
+					if (playlist) { 
+						playlist._onEnd(this.soundId);
+					}
+				}
 			}
 		}
 	}

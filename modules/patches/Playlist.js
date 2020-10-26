@@ -5,7 +5,7 @@ Playlist.prototype.findOrCreatePlayer = function(sound) {
 	if (sound.flags.bIsStreamed && sound.flags.streamingApi !== undefined)
 	{
 		return getApi(sound.flags.streamingApi).findOrCreatePlayer(
-			this.id, sound
+			this.id, sound._id, sound.flags.streamingId
 		);
 	}
 	return null;
@@ -15,7 +15,7 @@ Playlist.prototype.cleanupPlayer = function (sound) {
 	if (sound.flags.bIsStreamed && sound.flags.streamingApi !== undefined)
 	{
 		getApi(sound.flags.streamingApi).cleanupPlayer(
-			this.id, sound
+			this.id, sound._id
 		);
 	}
 }
@@ -35,7 +35,11 @@ overrideFunc(Playlist.prototype, '_createAudio', function(super_createAudio, sou
 	else if(sound.playing)
 	{
 		//resume after foundry suspension
-		this.findOrCreatePlayer(sound);
+		let player = this.findOrCreatePlayer(sound);
+		player.setSourceId(sound.flags.streamingId);
+		player.setLoop(sound.repeat);
+		player.setVolume(sound.volume * game.settings.get("core", "globalPlaylistVolume"));
+		player.ensurePlaying(sound.playing);
 	}
 });
 
@@ -49,7 +53,11 @@ overrideFunc(Playlist.prototype, 'playSound', function(super_playSound, sound)
 
 	if (sound.playing) {
 
-		this.findOrCreatePlayer(sound);
+		let player = this.findOrCreatePlayer(sound);
+		player.setSourceId(sound.flags.streamingId);
+		player.setLoop(sound.repeat);
+		player.setVolume(sound.volume * game.settings.get("core", "globalPlaylistVolume"));
+		player.ensurePlaying(sound.playing);
 		console.log('playSound', sound.flags.streamingId, sound.playing);
 		
 	} else {
