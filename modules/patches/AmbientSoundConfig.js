@@ -1,9 +1,9 @@
 import { overrideFunc } from './patcher.js';
 import { applyStreamingSoundConfig } from './SoundConfig.js';
 
-Hooks.on('renderAmbientSoundConfig', (cfg, html, data) =>
+Hooks.on('renderAmbientSoundConfig', (sender, html, data) =>
 {
-	applyStreamingSoundConfig(html, data.object);
+	applyStreamingSoundConfig(sender, html, data.object);
 });
 
 overrideFunc(AmbientSoundConfig.prototype, '_updateObject', function(super_updateObject, evt, formData, etc)

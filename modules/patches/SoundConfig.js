@@ -1,6 +1,6 @@
 import { findFormGroup, overrideFunc } from './patcher.js';
 
-export function applyStreamingSoundConfig(html, data)
+export function applyStreamingSoundConfig(sender, html, data)
 {
 	const audioIsStreamed = (data.flags || {}).bIsStreamed || false;
 	const audioStreamedApi = (data.flags || {}).streamingApi || '';
@@ -37,11 +37,19 @@ export function applyStreamingSoundConfig(html, data)
 		groupAudioSourcePath.css('display', !bIsStreamed ? 'flex' : 'none');
 		groupStreamedUrl.css('display', bIsStreamed ? 'flex' : 'none');
 	};
-	inputIsStreamed.on('change', evt => adjustVisibility(evt.target.checked));
+	inputIsStreamed.on('change', evt => {
+		adjustVisibility(evt.target.checked);
+		sender.setPosition();
+	});
 	inputStreamedUrl.on('change', evt => {
 		const api = Object.values(game.musicStreaming).find(api => api.supportsUrl(evt.target.value));
 		inputStreamedUrl.val(api !== undefined ? api.extractSourceIdFromUrl(evt.target.value) : '');
 		form.find('span[name="api"]').html(api !== undefined ? api.getId() : 'none');
+		sender.setPosition();
 	});
+
 	adjustVisibility(audioIsStreamed);
+
+	sender.options.height = 'auto';
+	sender.setPosition();
 }

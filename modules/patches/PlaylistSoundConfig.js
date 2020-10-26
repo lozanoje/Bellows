@@ -1,9 +1,9 @@
 import { overrideFunc } from './patcher.js';
 import { applyStreamingSoundConfig } from './SoundConfig.js';
 
-Hooks.on('renderPlaylistSoundConfig', (cfg, html, data) =>
+Hooks.on('renderPlaylistSoundConfig', (sender, html, data) =>
 {
-	applyStreamingSoundConfig(html, data);
+	applyStreamingSoundConfig(sender, html, data);
 });
 
 overrideFunc(PlaylistSoundConfig.prototype, '_updateObject', function(super_updateObject, evt, formData, etc)
