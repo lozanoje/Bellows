@@ -31,7 +31,7 @@ The current feature set includes:
 - YouTube Playlist imports
 
 ## Tutorial
-[![Bellows Demonstration](https://img.youtube.com/vi/--b-9HrKK6w/Z9A0Hq6BR8Y.jpg)](https://youtu.be/Z9A0Hq6BR8Y)
+[![Bellows Demonstration](https://img.youtube.com/vi/Z9A0Hq6BR8Y/0.jpg)](https://youtu.be/Z9A0Hq6BR8Y)
 
 ## Known Issues
 - In Firefox, audio may not play in certain scenarios due to autoplay restrictions. You can fix this by clicking the autoplay button in the url bar and allowing it for your Foundry VTT site. Each player using Firefox will need to do this for it to work. Chromium based browsers don't have this issue.
