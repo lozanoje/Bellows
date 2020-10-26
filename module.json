@@ -12,7 +12,7 @@
       "url": "https://github.com/temportalflux"
     }
   ],
-  "version": "0.3.0",
+  "version": "0.3.1",
   "minimumCoreVersion": "0.6.6",
   "compatibleCoreVersion": "0.7.5",
   "esmodules": [
@@ -26,7 +26,7 @@
   ],
   "url": "https://github.com/casualchameleon/Bellows",
   "manifest": "https://raw.githubusercontent.com/casualchameleon/Bellows/master/module.json",
-  "download": "https://github.com/casualchameleon/Bellows/releases/download/0.3.0/bellows_0.3.0.zip",
+  "download": "https://github.com/casualchameleon/Bellows/releases/download/0.3.1/bellows_0.3.1.zip",
   "socket": true,
   "debugBuildDirectory": "D:\\Documents\\FoundryVTT\\Data\\modules",
   "packageItems": [
