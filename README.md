@@ -30,7 +30,7 @@ The current feature set includes:
 - Ambient Sound objects can be marked as streaming sounds with the same functionality as streamed playlist tracks (these are unable to fade however)
 - YouTube Playlist imports
 
-## Demonstraion
+## Demonstration 
 [![Bellows Demonstration](https://img.youtube.com/vi/Z9A0Hq6BR8Y/0.jpg)](https://youtu.be/Z9A0Hq6BR8Y)
 
 ## Known Issues
