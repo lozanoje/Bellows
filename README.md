@@ -39,3 +39,5 @@ Many thanks to [Sunamon](https://github.com/Sunamon) and [OrbitalBliss](https://
 - In Firefox, audio may not play in certain scenarios due to autoplay restrictions. You can fix this by clicking the autoplay button in the url bar and allowing it for your Foundry VTT site. Each player using Firefox will need to do this for it to work. Chromium based browsers don't have this issue.
 
 ![image](https://user-images.githubusercontent.com/1485053/97107921-03e8ff80-16c2-11eb-8695-59da5c368a19.png)
+
+- Importing high volumes of playlists can cause you to be temporarily timed out by the YouTube API as scraping songs from the iframe makes a lot of calls. Please only import what you need! If you do get timed out, cycling your IP address should fix it for you.
