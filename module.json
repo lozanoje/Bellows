@@ -45,6 +45,7 @@
       "path": "lang/en.json"
     }
   ],
+  "license": "https://github.com/casualchameleon/Bellows/blob/master/LICENSE"
   "icons": [
     "./icons/music-spell.png",
     "./icons/music-spell.svg"
