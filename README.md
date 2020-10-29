@@ -32,6 +32,7 @@ The current feature set includes:
 
 ## Demonstration
 Many thanks to [Sunamon](https://github.com/Sunamon) and [OrbitalBliss](https://github.com/OrbitalBliss) for putting together a demonstration of Bellows' basic features.
+
 [![Bellows Demonstration](https://img.youtube.com/vi/Z9A0Hq6BR8Y/0.jpg)](https://youtu.be/Z9A0Hq6BR8Y)
 
 ## Known Issues

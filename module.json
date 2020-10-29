@@ -27,6 +27,7 @@
   "url": "https://github.com/casualchameleon/Bellows",
   "manifest": "https://raw.githubusercontent.com/casualchameleon/Bellows/master/module.json",
   "download": "https://github.com/casualchameleon/Bellows/releases/download/0.3.2/bellows_0.3.2.zip",
+  "license": "https://github.com/casualchameleon/Bellows/blob/master/LICENSE",
   "socket": true,
   "debugBuildDirectory": "D:\\Documents\\FoundryVTT\\Data\\modules",
   "packageItems": [
@@ -36,7 +37,8 @@
     "styles",
     "templates",
     "module.json",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "languages": [
     {
@@ -45,7 +47,6 @@
       "path": "lang/en.json"
     }
   ],
-  "license": "https://github.com/casualchameleon/Bellows/blob/master/LICENSE",
   "icons": [
     "./icons/music-spell.png",
     "./icons/music-spell.svg"
